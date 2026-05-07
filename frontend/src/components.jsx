@@ -441,6 +441,8 @@ export function NewCourse() {
   const [courseName,setCourseName] = useState("")
   const [courseNumber,setCourseNumber] = useState("")
   const [courseInstructionType,setCourseInstructionType] = useState("")
+  const [courseDescription, setCourseDescription] = useState("")
+  const [courseCreditHours,setCourseCreditHours] = useState("")
   
   const addCourse = async (e) =>{
     e.preventDefault()
@@ -448,7 +450,10 @@ export function NewCourse() {
       courseID == "" ||
       courseName == "" ||
       courseNumber == "" ||
-      courseInstructionType == ""
+      courseInstructionType == "" ||
+      courseCreditHours == "" ||
+      isNaN(+courseCreditHours) ||
+      courseDescription == ""
     ){
       setShowWarn(true)
     } else {
@@ -461,7 +466,9 @@ export function NewCourse() {
             CourseID: courseID,
             CourseName: courseName,
             CourseNumber: courseNumber,
-            CourseInstructionType: courseInstructionType
+            CourseInstructionType: courseInstructionType,
+            CourseDescription: courseDescription,
+            CourseCreditHours: courseCreditHours
           })          
         })
         if (!resp.ok) throw new Error
@@ -492,12 +499,23 @@ export function NewCourse() {
         <input type="text" className="form-control" id="floatingCourseNumber" value={courseNumber} onChange={(e)=>{setCourseNumber(e.target.value)}} placeholder="Prog 101"/>
         <label htmlFor="floatingCourseNumber">Course Number</label>
       </div>
-      <select defaultValue="" className="form-select mb-3" aria-label="Select an Instruction Type" name="courseInstructionType" onChange={(e)=>{setCourseInstructionType(e.target.value)}}>
-        <option value="">-Select an Instruction Type-</option>
-        <option value="Hybrid">Hybrid</option>
-        <option value="On Campus">On Campus</option>
-        <option value="Remote">Remote</option>
-      </select>
+      <div className="form-floating mb-3">
+        <input type="text" className="form-control" id="floatingCourseCreditHours" value={courseCreditHours} onChange={(e)=>{setCourseCreditHours(e.target.value)}} placeholder="3"/>
+        <label htmlFor="floatingCourseCreditHours">Course Credit Hours</label>
+      </div>
+      <div className="form-floating mb-3">
+        <textarea className="form-control" placeholder="Course Description" id="floatingDescription" style={{height: "100px"}} onChange={(e)=>{setCourseDescription(e.target.value)}}></textarea>
+        <label htmlFor="floatingDescription">Course Description</label>
+      </div>
+      <div className="form-floating mb-3">
+        <select defaultValue="" className="form-select mb-3" aria-label="Select an Instruction Type" name="courseInstructionType" id="courseInstructionType" onChange={(e)=>{setCourseInstructionType(e.target.value)}}>
+          <option value="">-Select Learning Type -</option>
+          <option value="Hybrid">Hybrid</option>
+          <option value="On Campus">On Campus</option>
+          <option value="Remote">Remote</option>
+        </select>
+        <label htmlFor="courseInstructionType">Learning Type</label>
+      </div>
       <button id="addStudentBtn" type="button" className="btn btn-primary" onClick={addCourse}>Add</button>
     </div>
   )
