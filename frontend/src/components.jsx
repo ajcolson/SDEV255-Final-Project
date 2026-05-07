@@ -48,7 +48,7 @@ export function Course() {
   useEffect(()=>{
     async function getCourseData(){
       try {
-        const resp = await fetch(`http://localhost:3000/courses/${params.id}`)
+        const resp = await fetch(`${import.meta.env.VITE_API_URL}/courses/${params.id}`)
         if (!resp.ok) throw new Error("Unable to load course...")
         const respData = await resp.json()
         setCourseDetails(respData.messageText.details)
@@ -126,7 +126,7 @@ export function Courses() {
   useEffect(()=>{
     async function getCourses(){
       try {
-        const resp = await fetch("http://localhost:3000/courses/")
+        const resp = await fetch(`${import.meta.env.VITE_API_URL}/courses/`)
         if (!resp.ok) throw new Error("Unable to load courses...")
         const respData = await resp.json()
         setCourses(respData.messageText)
@@ -200,7 +200,7 @@ export function Student() {
   useEffect(()=>{
     async function getCourseData(){
       try {
-        const resp = await fetch(`http://localhost:3000/students/${params.id}`)
+        const resp = await fetch(`${import.meta.env.VITE_API_URL}/students/${params.id}`)
         if (!resp.ok) throw new Error("Unable to load student...")
         const respData = await resp.json()
         setStudentDetails(respData.messageText.details)
@@ -278,7 +278,7 @@ export function Students() {
   useEffect(()=>{
     async function getCourses(){
       try {
-        const resp = await fetch("http://localhost:3000/students/")
+        const resp = await fetch(`${import.meta.env.VITE_API_URL}/students/`)
         if (!resp.ok) throw new Error("Unable to load students...")
         const respData = await resp.json()
         setStudents(respData.messageText)
@@ -342,12 +342,12 @@ const navigate = useNavigate()
   useEffect(()=>{
     async function getAllData(){
       try {
-        const reqForCourses = await fetch("http://localhost:3000/courses/")
+        const reqForCourses = await fetch(`${import.meta.env.VITE_API_URL}/courses/`)
         if (!reqForCourses.ok) throw new Error("Unable to load courses...")
         const respForCoursesData = await reqForCourses.json()
         setAllCourses(respForCoursesData.messageText)
 
-        const reqForStudents = await fetch("http://localhost:3000/students/")
+        const reqForStudents = await fetch(`${import.meta.env.VITE_API_URL}/students/`)
         if (!reqForStudents.ok) throw new Error("Unable to load students...")
         const respForStudentData = await reqForStudents.json()
         setAllStudents(respForStudentData.messageText)
@@ -373,7 +373,7 @@ const navigate = useNavigate()
       setShowWarn(false)
       try {
         const enrollID = Date.now()
-        const resp = await fetch("http://localhost:3000/enrollments/",{
+        const resp = await fetch(`${import.meta.env.VITE_API_URL}/enrollments/`,{
           method:"POST",
           headers:{'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -444,7 +444,7 @@ export function NewCourse() {
     } else {
       setShowWarn(false)
       try {
-        const resp = await fetch("http://localhost:3000/courses/",{
+        const resp = await fetch(`${import.meta.env.VITE_API_URL}/courses/`,{
           method:"POST",
           headers:{'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -505,7 +505,7 @@ export function NewStudent() {
     } else {
       setShowWarn(false)
       try {
-        const resp = await fetch("http://localhost:3000/students/",{
+        const resp = await fetch(`${import.meta.env.VITE_API_URL}/students/`,{
           method:"POST",
           headers:{'Content-Type': 'application/json'},
           body: JSON.stringify({StudentID:studentID,StudentName:studentName})          

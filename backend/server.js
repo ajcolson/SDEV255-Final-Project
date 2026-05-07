@@ -19,13 +19,17 @@ dns.setServers(["1.1.1.1", "1.0.0.1"]);
 dotenv.config();
 connectDB();
 const app = express();
-const port = process.env.DB_PORT || 3000;
+const port = 3000;
 
 app.use(cors());
 app.use(express.json());
 app.use("/students", studentRoutes);
 app.use("/courses", courseRoutes)
 app.use("/enrollments", enrollmentRoutes)
+
+app.get("/",async(req,res)=>{
+  res.send(`<h1>Backend is started!</h1><div>This is just the backend server. You can head to <a target="_blank" href="${process.env.FRONTEND_URL}">Frontend Site</a> to see how it is used.</div><div>Note: Due to some quirks with Render and its free hosting, you might need to reload this page to ensure the server stays running and allows the Frontend Site to work.</div>`)
+})
 
 app.listen(port, () => {
   console.log(`Server has started!`);
