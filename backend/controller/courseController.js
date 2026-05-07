@@ -25,12 +25,16 @@ export const createCourse = async (req, res) => {
     const id = req.body.CourseID
     const number = req.body.CourseNumber
     const instructType = req.body.CourseInstructionType
+    const desc = req.body.CourseDescription
+    const creditHours = req.body.CourseCreditHours
 
     const newCourse = await Course.create({
         CourseID: id,
         CourseName: name,
         CourseNumber: number,
-        CourseInstructionType: instructType
+        CourseInstructionType: instructType,
+        CourseDescription: desc,
+        CourseCreditHours: creditHours
     })
     const done = await newCourse.save()
     res.status(201).json({

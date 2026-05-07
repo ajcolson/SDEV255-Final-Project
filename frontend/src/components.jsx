@@ -81,8 +81,12 @@ export function Course() {
     <div className="container">
       <h1>Course Details</h1>
       <p>{courseDetails.CourseNumber} - {courseDetails.CourseName}</p>
-      <p>This course is offered in "{courseDetails.CourseInstructionType}" format.</p>
-      <h2 className="mt-5">Enrolled Students</h2>
+      <p>{courseDetails.CourseDescription}</p>
+      <h3>Credit Hours</h3>
+      <p>{courseDetails.CourseCreditHours}</p>
+      <h3>Learning Type</h3>
+      <p>{courseDetails.CourseInstructionType}</p>
+      <h1 className="mt-5">Enrolled Students</h1>
       <p>No students are currently enrolled.</p>
     </div>
   )
@@ -91,8 +95,12 @@ export function Course() {
     <div className="container">
       <h1>Course Details</h1>
       <p>{courseDetails.CourseNumber} - {courseDetails.CourseName}</p>
-      <p>This course is offered: {courseDetails.CourseInstructionType}</p>
-      <h2 className="mt-5">Enrolled Students</h2>
+      <p>{courseDetails.CourseDescription}</p>
+      <h3>Credit Hours</h3>
+      <p>{courseDetails.CourseCreditHours}</p>
+      <h3>Learning Type</h3>
+      <p>{courseDetails.CourseInstructionType}</p>
+      <h1 className="mt-5">Enrolled Students</h1>
       <table className="table table-hover">
         <tbody>
           {students.map((student,ind)=>{
@@ -163,6 +171,7 @@ export function Courses() {
             <th scope="col">Course #</th>
             <th scope="col">Course Name</th>
             <th scope="col">Course Type</th>
+            <th scope="col">Credit Hours</th>
           </tr>
         </thead>
         <tbody>
@@ -172,6 +181,7 @@ export function Courses() {
             <th scope="row">{course.CourseNumber}</th>
             <td>{course.CourseName}</td>
             <td>{course.CourseInstructionType}</td>
+            <td>{course.CourseCreditHours}</td>
           </tr>
           )
           })}
