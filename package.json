@@ -4,6 +4,6 @@
   },
    "scripts": {
       "build":"npm install && cd backend && npm install && cd ../frontend && npm install",
-      "dev": "concurrently \"cd backend && npm run start\" \"cd frontend && npm run start\" "
+      "dev": "concurrently \"cd backend && npm run start\" \"cd frontend && npm run dev\" "
    }
 }
