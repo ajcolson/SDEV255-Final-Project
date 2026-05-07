@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+   "scripts": {
+      "build":"concurrently \"cd backend && npm install\" \"cd frontend && npm install\"",
+      "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\" "
+   }
+}
