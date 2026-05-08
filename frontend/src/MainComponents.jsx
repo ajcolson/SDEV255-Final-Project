@@ -68,11 +68,20 @@ export function Course() {
   const [pending, setPending] = useState(true)
   const [error, setError] = useState(null)
   
-  const openStudent = async (e) => {
-    if(e.target.nodeName == "TD" || e.target.nodeName == "TH"){
-      navigate(`/students/${e.target.parentElement.getAttribute("data-sid")}`)
-    } else {
-      navigate(`/students/${e.target.getAttribute("data-sid")}`)
+  const dropStudent = async (e) => {
+    let eid = e.target.getAttribute("data-eid")
+    let studentName = e.target.getAttribute("data-sname")
+    let resp = prompt(`You are trying to drop the student "${studentName}" from this course.\nTo confirm this action, please type "sudo drop student" below.`)
+    if (resp == "sudo drop student"){
+      try {
+        const resp = await fetch(`${import.meta.env.VITE_API_URL}/enrollments/${eid}`, { method: "DELETE"})
+        if (!resp.ok)
+          throw new Error("Failed to drop course. Please try again.")
+        const respData = resp.json()
+        history.go()
+      } catch(e) {
+        alert(e)
+      }
     }
   }
 
@@ -136,8 +145,14 @@ export function Course() {
         <tbody>
           {students.map((student,ind)=>{
             return (
-              <tr className="hover-cursor-pointer" key={ind} data-sid={student.StudentID} onClick={openStudent}>
-                <th scope="row">{student.StudentName}</th>
+              <tr key={ind}>
+                <th scope="row">
+                  <div className="pt-2">{student.Details.StudentName}</div>
+                </th>
+                <td>
+                  <button className="btn btn-outline-danger float-end" data-eid={student.EnrollmentID} data-sname={student.Details.StudentName} onClick={dropStudent}>Drop Student</button>
+                  <Link to={`/students/${student.Details.StudentID}`} className="btn btn-primary float-end me-2" >View Student</Link>
+                </td>
               </tr>
             )
           })}
@@ -233,7 +248,7 @@ export function Student() {
   const dropCourse = async (e) => {
     let eid = e.target.getAttribute("data-eid")
     let courseName = e.target.getAttribute("data-cname")
-    let resp = prompt(`You are trying to drop the course "${courseName}".\nTo confirm this action, please type "sudo drop course" below.`)
+    let resp = prompt(`You are trying to drop the course "${courseName} for this student".\nTo confirm this action, please type "sudo drop course" below.`)
     if (resp == "sudo drop course"){
       try {
         const resp = await fetch(`${import.meta.env.VITE_API_URL}/enrollments/${eid}`, { method: "DELETE"})
@@ -299,7 +314,7 @@ export function Student() {
         <tbody>
           {courses.map((course,ind)=>{
             return (
-              <tr className="" key={ind}>
+              <tr key={ind}>
                 <th scope="row">
                   <div className="pt-2">{course.Details.CourseName}</div>
                 </th>
