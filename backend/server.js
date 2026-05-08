@@ -17,7 +17,6 @@ import userauthRoutes from "./route/userauthRoute.js"
 import dns from "node:dns/promises"; 
 dns.setServers(["1.1.1.1", "1.0.0.1"]);
 
-
 dotenv.config();
 connectDB();
 const app = express();
@@ -31,7 +30,7 @@ app.use("/courses", courseRoutes)
 app.use("/enrollments", enrollmentRoutes)
 
 app.get("/",async(req,res)=>{
-  res.send(`<h1>Backend is started!</h1><div>This is just the backend server. You can head to <a target="_blank" href="${process.env.FRONTEND_URL}">Frontend Site</a> to see how it is used.</div><div>Note: Due to some quirks with Render and its free hosting, you might need to reload this page to ensure the server stays running and allows the Frontend Site to work.</div>`)
+  res.send(`<!doctype html><html lang="en" data-bs-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Express Server</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"></head><body><div class="card m-5 p-5"><h1 class="mb-2 pb-2">SDEV255 Final Backend</h1><p>This is the Backend Express server for the SDEV255 Final Project. This server doesn't serve the frontend application pages. Check out the <a target="_blank" href="${process.env.FRONTEND_URL}">Frontend Site</a> to see the full application.</p><h3>Note</h3><p>If the frontend site fails to load content or crashes, this backend server may have been stopped. You will need to <a href=".">Reload this page</a> to restart the server.</p></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script></body></html>`)
 })
 
 app.listen(port, () => {
