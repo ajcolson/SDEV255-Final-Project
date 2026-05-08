@@ -9,6 +9,8 @@ import Course from "./model/course.js";
 import courseRoutes from "./route/courseRoute.js"
 import Enrollment from "./model/enrollment.js";
 import enrollmentRoutes from "./route/enrollmentRoute.js"
+import User from "./model/user.js"
+import userauthRoutes from "./route/userauthRoute.js"
 
 // mongodb hack ... why does this work?
 // This appears to be required for MongoDB to work for some clients
@@ -23,7 +25,8 @@ const port = 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use("/students", studentRoutes);
+app.use("/userauth", userauthRoutes)
+app.use("/students", studentRoutes)
 app.use("/courses", courseRoutes)
 app.use("/enrollments", enrollmentRoutes)
 
