@@ -230,11 +230,20 @@ export function Student() {
   const [pending, setPending] = useState(true)
   const [error, setError] = useState(null)
   
-  const openCourse = async (e) => {
-    if(e.target.nodeName == "TD" || e.target.nodeName == "TH"){
-      navigate(`/courses/${e.target.parentElement.getAttribute("data-cid")}`)
-    } else {
-      navigate(`/courses/${e.target.getAttribute("data-cid")}`)
+  const dropCourse = async (e) => {
+    let eid = e.target.getAttribute("data-eid")
+    let courseName = e.target.getAttribute("data-cname")
+    let resp = prompt(`You are trying to drop the course "${courseName}".\nTo confirm this action, please type "sudo drop course" below.`)
+    if (resp == "sudo drop course"){
+      try {
+        const resp = await fetch(`${import.meta.env.VITE_API_URL}/enrollments/${eid}`, { method: "DELETE"})
+        if (!resp.ok)
+          throw new Error("Failed to drop course. Please try again.")
+        const respData = resp.json()
+        history.go()
+      } catch(e) {
+        alert(e)
+      }
     }
   }
 
@@ -290,8 +299,14 @@ export function Student() {
         <tbody>
           {courses.map((course,ind)=>{
             return (
-              <tr className="hover-cursor-pointer" key={ind} data-cid={course.CourseID} onClick={openCourse}>
-                <th scope="row">{course.CourseName}</th>
+              <tr className="" key={ind}>
+                <th scope="row">
+                  <div className="pt-2">{course.Details.CourseName}</div>
+                </th>
+                <td>
+                  <button className="btn btn-outline-danger float-end" data-eid={course.EnrollmentID} data-cname={course.Details.CourseName} onClick={dropCourse}>Drop Course</button>
+                  <Link to={`/courses/${course.Details.CourseID}`} className="btn btn-primary float-end me-2" >View Course</Link>
+                </td>
               </tr>
             )
           })}

@@ -72,7 +72,7 @@ export const updateEnrollment = async (req, res) => {
 export const deleteEnrollment = async (req, res) => {
   try {
     const { id } = req.params
-    const deletedEnrollment = await Enrollment.findByIdAndDelete(id)
+    const deletedEnrollment = await Enrollment.findOneAndDelete({"EnrollmentID":id})
     if (!deletedEnrollment) {
       return res.status(404).json({
         resultType: "error",

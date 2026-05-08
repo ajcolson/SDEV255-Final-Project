@@ -104,11 +104,16 @@ export const getIndividualStudent = async (req,res) =>{
     let enrollments = await Enrollment.find({"StudentID":id})
     let foundCourses = []
     for (let ind in enrollments){
+      let eid = enrollments[ind].EnrollmentID
       let cid = enrollments[ind].CourseID
+      let course = await Course.findOne({"CourseID":cid})
       if (!foundCourses.includes(cid)){
         foundCourses.push(cid)
-        let course = await Course.findOne({"CourseID":cid})
-        studentData.courses.push(course)
+        let courseDetails = {
+          "EnrollmentID":eid,
+          "Details":course
+        }
+        studentData.courses.push(courseDetails)
       }
     }
     res.status(200).json({
