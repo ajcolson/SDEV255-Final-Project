@@ -4,27 +4,58 @@ import { useState, useEffect, useRef } from "react"
 export function Home() {
   return (
     <div className="container">
-      <h1>Welcome!</h1>
+      <h1 className="mt-3 mb-5">Welcome!</h1>
       <div>
-        Using this site, you can:
-        <ul>
-          <li>
-            <Link to="/courses">View all courses offered.</Link>
-          </li>
-          <li>
-            <Link to="/students">See a list of all students.</Link>
-          </li>
-          <li>
-            <Link  to="/enroll">Enroll a student into a course</Link>
-          </li>
-          <li>
-            <Link to="/newcourse">Create a new Course</Link>
-          </li>
-          <li>
-            <Link to="/newstudent">Create a new Student</Link>
-          </li>
-        </ul>
-      </div>
+        <div className="row mb-4">
+          <div className="col-sm-6 mb-3 mb-sm-0">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">View All Courses</h5>
+                <p className="card-text">Get a full list of all courses currently in the system.</p>
+                <Link to="/courses" className="btn btn-primary">Show</Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-6 mb-3 mb-sm-0">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">View All Students</h5>
+                <p className="card-text">Get a full list of all students currently in the system.</p>
+                <Link to="/students" className="btn btn-primary">Show</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-4 mb-3 mb-sm-0">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">New Enrollment</h5>
+                <p className="card-text">Enroll a student into a course.</p>
+                <Link to="/enroll" className="btn btn-primary">Start Enrollment</Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-4 mb-3 mb-sm-0">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">New Course</h5>
+                <p className="card-text">Create a new course for the system.</p>
+                <Link to="/newcourse" className="btn btn-primary">Create Course</Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-4 mb-3 mb-sm-0">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">New Student</h5>
+                <p className="card-text">Create a new student in the system.</p>
+                <Link to="/newstudent" className="btn btn-primary">Create Student</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>    
     </div>
   )
 }
