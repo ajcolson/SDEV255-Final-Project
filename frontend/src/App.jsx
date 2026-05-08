@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { BrowserRouter, Routes, Route, NavLink, Link } from "react-router-dom"
-import { Layout } from "./nav.jsx"
-import { Home, Courses, Course, Student, Students, Enroll, NewCourse, NewStudent, PageNotFound } from "./components.jsx"
+import { MainLayout } from "./MainLayout.jsx"
+import { Home, Courses, Course, Student, Students, Enroll, NewCourse, NewStudent, PageNotFound } from "./MainComponents.jsx"
 import './App.css'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout/>}>
+        <Route path="/" element={<MainLayout/>}>
           <Route index element={<Home/>}/>
           <Route path="/courses">
             <Route index element={<Courses/>}/>

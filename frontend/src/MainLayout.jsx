@@ -61,7 +61,7 @@ export function Footer() {
   )
 }
 
-export function Layout() {
+export function MainLayout() {
   return (
   <>
     <Header />
